@@ -3,12 +3,12 @@ import 'the-new-css-reset';
 import { clock } from './core/clock';
 import { renderer } from './core/renderer';
 import { sizes } from './core/sizes';
-import { DirectionalLightingSample } from './studies/directional-lighting/DirectionalLightingSample';
+import { ManualLighting } from './studies/manual-lighting/ManualLighting';
 
 sizes.addEventListener('resize', resize);
 clock.addEventListener('tick', update);
 
-const example = new DirectionalLightingSample();
+const example = new ManualLighting();
 renderer.scene.add(example.mesh);
 
 function resize() {
