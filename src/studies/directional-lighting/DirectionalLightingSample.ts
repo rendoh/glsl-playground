@@ -24,7 +24,7 @@ export class DirectionalLightingSample {
       side: THREE.DoubleSide,
       uniforms: {
         uTime: { value: 0 },
-        uLightDirection: { value: new THREE.Vector3(0, 0, -1) },
+        uLightDirection: { value: new THREE.Vector3(-1, 1, -1) },
       },
     });
     this.mesh = new THREE.Mesh(torusGeometry, this.material);
