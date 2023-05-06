@@ -15,8 +15,9 @@ vec3 hsv(float h, float s, float v) {
 }
 
 void main() {
-  vec3 color = hsv(wrapFloat(uTime / 10000. + distance(vUv * .5, vec2(.25, .25)), 0., 1.), 1., 1.);
+  vec4 ambientColor = vec4(.2, .2, .2, 1.);
+  vec3 directionalColor = hsv(wrapFloat(uTime / 10000. + distance(vUv * .5, vec2(.25, .25)), 0., 1.), 1., 1.);
   float intensity = .9;
   float diffuse = clamp(dot(vNormal, -normalize(uLightDirection)), 0., 1.);
-  gl_FragColor = vec4(color * intensity * diffuse, 1.);
+  gl_FragColor = vec4(directionalColor * intensity * diffuse, 1.) + ambientColor;
 }
