@@ -21,7 +21,6 @@ export class DirectionalLightingSample {
     this.material = new THREE.ShaderMaterial({
       vertexShader,
       fragmentShader,
-      side: THREE.DoubleSide,
       uniforms: {
         uTime: { value: 0 },
         uLightDirection: { value: new THREE.Vector3(-1, 1, -1) },
