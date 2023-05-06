@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 
-import { clock } from '../core/clock';
+import { clock } from '../../core/clock';
 import fragmentShader from './fragment.glsl';
 import vertexShader from './vertex.glsl';
 
-const geometry = new THREE.PlaneGeometry(256, 256);
+const torusGeometry = new THREE.TorusGeometry(250, 100, 16, 32);
 
-export class Example {
+export class DirectionalLightingSample {
   public readonly mesh: THREE.Mesh;
   private material: THREE.ShaderMaterial;
   constructor() {
@@ -16,14 +16,18 @@ export class Example {
       side: THREE.DoubleSide,
       uniforms: {
         uTime: { value: 0 },
+        uInvMatrix: { value: new THREE.Matrix4() },
+        uLightDirection: { value: new THREE.Vector3(0, 0, -1) },
       },
     });
-    this.mesh = new THREE.Mesh(geometry, this.material);
+    this.mesh = new THREE.Mesh(torusGeometry, this.material);
   }
   public dispose() {
     this.material.dispose();
   }
   public update() {
+    this.mesh.rotation.y += clock.delta / 1000;
     this.material.uniforms.uTime.value += clock.delta;
+    this.material.uniforms.uInvMatrix.value = this.mesh.matrix.clone().invert();
   }
 }
